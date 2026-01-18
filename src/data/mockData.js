@@ -1,105 +1,385 @@
-// Marketplace Mock Data
+// Comprehensive Marketplace Mock Data based on Database Schema
+// Tables: Gunung, Jalur Pendakian, Basecamps, Layanan Basecamp, User
 
-export const categories = [
-    { id: 1, name: 'Mountains', icon: 'landscape', isActive: true },
-    { id: 2, name: 'Open Trip', icon: 'map', isActive: false },
-    { id: 3, name: 'Gear Rental', icon: 'backpack', isActive: false },
-    { id: 4, name: 'Porters', icon: 'hiking', isActive: false },
-    { id: 5, name: 'Guides', icon: 'person_pin', isActive: false },
-];
-
-export const popularMountains = [
+// ============================================
+// USERS (Vendors/Hikers)
+// ============================================
+export const users = [
     {
         id: 1,
-        name: 'Mt. Rinjani',
-        location: 'Lombok, Indonesia',
-        rating: 4.8,
-        price: 50,
-        imageUrl: 'https://images.unsplash.com/photo-1606224992006-8c07b3c4e421?w=600&h=450&fit=crop',
-        isFavorite: false,
+        name: 'Rinjani Basecamp Official',
+        username: 'rinjani_basecamp',
+        email: 'info@rinjanibasecamp.id',
+        bio: 'Official basecamp partner untuk pendakian Gunung Rinjani via Senaru',
+        gender: 'other',
+        avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face',
+        role: 'vendor',
+        address: {
+            zip_code: '83354',
+            city: 'Lombok Utara',
+            province: 'Nusa Tenggara Barat',
+            address: 'Jl. Pariwisata Senaru No. 15'
+        }
     },
     {
         id: 2,
-        name: 'Mt. Fuji',
-        location: 'Honshu, Japan',
-        rating: 4.9,
-        price: 120,
-        imageUrl: 'https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?w=600&h=450&fit=crop',
-        isFavorite: false,
+        name: 'Semeru Adventure',
+        username: 'semeru_adventure',
+        email: 'hello@semeruadventure.com',
+        bio: 'Penyedia layanan pendakian Gunung Semeru sejak 2015',
+        gender: 'other',
+        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face',
+        role: 'vendor',
+        address: {
+            zip_code: '67184',
+            city: 'Lumajang',
+            province: 'Jawa Timur',
+            address: 'Desa Ranu Pani, Senduro'
+        }
     },
     {
         id: 3,
-        name: 'Matterhorn',
-        location: 'Zermatt, Switzerland',
-        rating: 4.7,
-        price: 200,
-        imageUrl: 'https://images.unsplash.com/photo-1531400158697-004a4a6d0f2a?w=600&h=450&fit=crop',
-        isFavorite: true,
+        name: 'Bromo Sunrise Camp',
+        username: 'bromo_sunrise',
+        email: 'booking@bromosunrise.id',
+        bio: 'Pengalaman sunrise terbaik di Gunung Bromo',
+        gender: 'other',
+        avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face',
+        role: 'vendor',
+        address: {
+            zip_code: '67254',
+            city: 'Probolinggo',
+            province: 'Jawa Timur',
+            address: 'Desa Ngadisari, Sukapura'
+        }
     },
     {
         id: 4,
-        name: 'Mt. Semeru',
-        location: 'East Java, Indonesia',
-        rating: 4.6,
-        price: 35,
+        name: 'Merbabu Gear Rental',
+        username: 'merbabu_gear',
+        email: 'rent@merbabugear.com',
+        bio: 'Sewa alat pendakian lengkap untuk Merbabu & Merapi',
+        gender: 'other',
+        avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&h=100&fit=crop&crop=face',
+        role: 'vendor',
+        address: {
+            zip_code: '57316',
+            city: 'Boyolali',
+            province: 'Jawa Tengah',
+            address: 'Jl. Selo-Boyolali Km 20'
+        }
+    }
+];
+
+// ============================================
+// GUNUNG (Mountains)
+// ============================================
+export const gunungData = [
+    {
+        id: 1,
+        nama_gunung: 'Gunung Rinjani',
+        mdpl: 3726,
+        provinsi: 'Nusa Tenggara Barat',
+        imageUrl: 'https://images.unsplash.com/photo-1606224992006-8c07b3c4e421?w=600&h=450&fit=crop',
+        rating: 4.8,
+        totalReviews: 1247,
+        difficulty: 'Hard',
+        estimatedDays: '3-4 hari',
+        isFavorite: false
+    },
+    {
+        id: 2,
+        nama_gunung: 'Gunung Semeru',
+        mdpl: 3676,
+        provinsi: 'Jawa Timur',
         imageUrl: 'https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?w=600&h=450&fit=crop',
-        isFavorite: false,
+        rating: 4.9,
+        totalReviews: 2156,
+        difficulty: 'Hard',
+        estimatedDays: '2-3 hari',
+        isFavorite: true
+    },
+    {
+        id: 3,
+        nama_gunung: 'Gunung Bromo',
+        mdpl: 2329,
+        provinsi: 'Jawa Timur',
+        imageUrl: 'https://images.unsplash.com/photo-1589308078059-be1415eab4c3?w=600&h=450&fit=crop',
+        rating: 4.7,
+        totalReviews: 3421,
+        difficulty: 'Easy',
+        estimatedDays: '1 hari',
+        isFavorite: false
+    },
+    {
+        id: 4,
+        nama_gunung: 'Gunung Merbabu',
+        mdpl: 3145,
+        provinsi: 'Jawa Tengah',
+        imageUrl: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&h=450&fit=crop',
+        rating: 4.6,
+        totalReviews: 1893,
+        difficulty: 'Medium',
+        estimatedDays: '2 hari',
+        isFavorite: false
     },
     {
         id: 5,
-        name: 'Mt. Bromo',
-        location: 'East Java, Indonesia',
-        rating: 4.8,
-        price: 25,
-        imageUrl: 'https://images.unsplash.com/photo-1589308078059-be1415eab4c3?w=600&h=450&fit=crop',
-        isFavorite: false,
-    },
+        nama_gunung: 'Gunung Prau',
+        mdpl: 2565,
+        provinsi: 'Jawa Tengah',
+        imageUrl: 'https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?w=600&h=450&fit=crop',
+        rating: 4.5,
+        totalReviews: 2784,
+        difficulty: 'Easy',
+        estimatedDays: '1-2 hari',
+        isFavorite: false
+    }
 ];
 
-export const gearRentals = [
+// ============================================
+// JALUR PENDAKIAN (Hiking Trails)
+// ============================================
+export const jalurPendakian = [
+    { id: 1, gunung_id: 1, nama_jalur: 'Senaru', estimatedTime: '10-12 jam', distance: '16 km' },
+    { id: 2, gunung_id: 1, nama_jalur: 'Sembalun', estimatedTime: '8-10 jam', distance: '14 km' },
+    { id: 3, gunung_id: 2, nama_jalur: 'Ranu Pani', estimatedTime: '12-14 jam', distance: '21 km' },
+    { id: 4, gunung_id: 3, nama_jalur: 'Cemoro Lawang', estimatedTime: '2-3 jam', distance: '3 km' },
+    { id: 5, gunung_id: 4, nama_jalur: 'Selo', estimatedTime: '5-6 jam', distance: '8 km' },
+    { id: 6, gunung_id: 4, nama_jalur: 'Wekas', estimatedTime: '6-7 jam', distance: '9 km' },
+    { id: 7, gunung_id: 5, nama_jalur: 'Dieng', estimatedTime: '3-4 jam', distance: '5 km' },
+    { id: 8, gunung_id: 5, nama_jalur: 'Patak Banteng', estimatedTime: '4-5 jam', distance: '6 km' },
+];
+
+// ============================================
+// BASECAMPS (Vendor Stores)
+// ============================================
+export const basecamps = [
     {
         id: 1,
-        name: 'Ultralight 2P Tent',
-        brand: 'Big Agnes',
-        price: 15,
-        priceUnit: 'day',
+        user_id: 1,
+        jalur_id: 1,
+        nama_basecamp: 'Rinjani Basecamp Senaru',
+        location_coordinate: '-8.3025, 116.4072',
+        rating: 4.8,
+        totalReviews: 342,
+        isVerified: true,
+        imageUrl: 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=400&h=300&fit=crop'
+    },
+    {
+        id: 2,
+        user_id: 2,
+        jalur_id: 3,
+        nama_basecamp: 'Semeru Adventure Camp',
+        location_coordinate: '-8.1025, 112.9222',
+        rating: 4.9,
+        totalReviews: 567,
+        isVerified: true,
+        imageUrl: 'https://images.unsplash.com/photo-1537225228614-56cc3556d7ed?w=400&h=300&fit=crop'
+    },
+    {
+        id: 3,
+        user_id: 3,
+        jalur_id: 4,
+        nama_basecamp: 'Bromo View Basecamp',
+        location_coordinate: '-7.9425, 112.9530',
+        rating: 4.6,
+        totalReviews: 891,
+        isVerified: true,
+        imageUrl: 'https://images.unsplash.com/photo-1478827536114-da961b7f86d2?w=400&h=300&fit=crop'
+    },
+    {
+        id: 4,
+        user_id: 4,
+        jalur_id: 5,
+        nama_basecamp: 'Selo Mountain Gear',
+        location_coordinate: '-7.4592, 110.4461',
+        rating: 4.7,
+        totalReviews: 234,
+        isVerified: false,
+        imageUrl: 'https://images.unsplash.com/photo-1510312305653-8ed496efae75?w=400&h=300&fit=crop'
+    }
+];
+
+// ============================================
+// LAYANAN BASECAMP (Products/Services)
+// ============================================
+export const layananBasecamp = [
+    // Equipment Rentals
+    {
+        id: 1,
+        basecamp_id: 1,
+        type: 'equipment',
+        unit: 'day',
+        harga: 75000,
+        stock: 15,
+        nama_layanan: 'Tenda Dome 2P',
+        deskripsi_layanan: 'Tenda kapasitas 2 orang, tahan angin dan waterproof',
         imageUrl: 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=400&h=400&fit=crop',
         isBookmarked: false,
+        rating: 4.7
     },
     {
         id: 2,
-        name: 'Quest 4 GTX',
-        brand: 'Salomon',
-        price: 12,
-        priceUnit: 'day',
-        imageUrl: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop',
-        isBookmarked: false,
+        basecamp_id: 1,
+        type: 'equipment',
+        unit: 'day',
+        harga: 50000,
+        stock: 20,
+        nama_layanan: 'Sleeping Bag -5°C',
+        deskripsi_layanan: 'Sleeping bag untuk suhu ekstrem hingga -5 derajat',
+        imageUrl: 'https://images.unsplash.com/photo-1510312305653-8ed496efae75?w=400&h=400&fit=crop',
+        isBookmarked: true,
+        rating: 4.8
     },
     {
         id: 3,
-        name: 'Atmos AG 65',
-        brand: 'Osprey',
-        price: 10,
-        priceUnit: 'day',
-        imageUrl: 'https://images.unsplash.com/photo-1622260614927-208ad5d0a9a5?w=400&h=400&fit=crop',
-        isBookmarked: true,
+        basecamp_id: 2,
+        type: 'equipment',
+        unit: 'day',
+        harga: 35000,
+        stock: 30,
+        nama_layanan: 'Trekking Pole (pair)',
+        deskripsi_layanan: 'Trekking pole aluminium adjustable',
+        imageUrl: 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=400&h=400&fit=crop',
+        isBookmarked: false,
+        rating: 4.5
     },
     {
         id: 4,
-        name: 'Trekking Poles',
-        brand: 'Black Diamond',
-        price: 5,
-        priceUnit: 'day',
-        imageUrl: 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=400&h=400&fit=crop',
+        basecamp_id: 2,
+        type: 'equipment',
+        unit: 'day',
+        harga: 45000,
+        stock: 10,
+        nama_layanan: 'Carrier 60L',
+        deskripsi_layanan: 'Tas carrier kapasitas 60 liter dengan frame',
+        imageUrl: 'https://images.unsplash.com/photo-1622260614927-208ad5d0a9a5?w=400&h=400&fit=crop',
         isBookmarked: false,
+        rating: 4.6
     },
     {
         id: 5,
-        name: 'Sleeping Bag -10°C',
-        brand: 'The North Face',
-        price: 8,
-        priceUnit: 'day',
-        imageUrl: 'https://images.unsplash.com/photo-1510312305653-8ed496efae75?w=400&h=400&fit=crop',
+        basecamp_id: 3,
+        type: 'equipment',
+        unit: 'day',
+        harga: 25000,
+        stock: 50,
+        nama_layanan: 'Headlamp LED',
+        deskripsi_layanan: 'Headlamp 1000 lumens rechargeable',
+        imageUrl: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop',
         isBookmarked: false,
+        rating: 4.4
     },
+    // Porter Services
+    {
+        id: 6,
+        basecamp_id: 1,
+        type: 'porter',
+        unit: 'trip',
+        harga: 350000,
+        stock: 8,
+        nama_layanan: 'Porter Profesional',
+        deskripsi_layanan: 'Porter berpengalaman, maksimal 15kg bagasi',
+        imageUrl: 'https://images.unsplash.com/photo-1522163182402-834f871fd851?w=400&h=400&fit=crop',
+        isBookmarked: false,
+        rating: 4.9
+    },
+    {
+        id: 7,
+        basecamp_id: 2,
+        type: 'porter',
+        unit: 'trip',
+        harga: 400000,
+        stock: 5,
+        nama_layanan: 'Porter + Cook',
+        deskripsi_layanan: 'Porter yang juga bisa memasak di basecamp',
+        imageUrl: 'https://images.unsplash.com/photo-1516939884455-1445c8652f83?w=400&h=400&fit=crop',
+        isBookmarked: false,
+        rating: 4.8
+    },
+    // Guide Services
+    {
+        id: 8,
+        basecamp_id: 1,
+        type: 'guide',
+        unit: 'trip',
+        harga: 500000,
+        stock: 4,
+        nama_layanan: 'Guide Bersertifikat',
+        deskripsi_layanan: 'Pemandu gunung bersertifikat BNPB',
+        imageUrl: 'https://images.unsplash.com/photo-1527631746610-bca00a040d60?w=400&h=400&fit=crop',
+        isBookmarked: true,
+        rating: 5.0
+    },
+    {
+        id: 9,
+        basecamp_id: 3,
+        type: 'guide',
+        unit: 'trip',
+        harga: 300000,
+        stock: 6,
+        nama_layanan: 'Local Guide Bromo',
+        deskripsi_layanan: 'Guide lokal yang paham medan Bromo',
+        imageUrl: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=400&h=400&fit=crop',
+        isBookmarked: false,
+        rating: 4.7
+    },
+    // Packages
+    {
+        id: 10,
+        basecamp_id: 2,
+        type: 'package',
+        unit: 'trip',
+        harga: 1500000,
+        stock: 10,
+        nama_layanan: 'Paket Semeru 3D2N',
+        deskripsi_layanan: 'Include: Guide, Porter, Tenda, Makan 3x, Transport lokal',
+        imageUrl: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&h=400&fit=crop',
+        isBookmarked: false,
+        rating: 4.9
+    }
 ];
+
+// ============================================
+// CATEGORIES (for filter chips)
+// ============================================
+export const categories = [
+    { id: 1, name: 'Semua', icon: 'apps', isActive: true },
+    { id: 2, name: 'Gunung', icon: 'landscape', isActive: false },
+    { id: 3, name: 'Open Trip', icon: 'groups', isActive: false },
+    { id: 4, name: 'Sewa Alat', icon: 'backpack', isActive: false },
+    { id: 5, name: 'Porter', icon: 'hiking', isActive: false },
+    { id: 6, name: 'Guide', icon: 'person_pin', isActive: false },
+];
+
+// ============================================
+// HELPER FUNCTIONS
+// ============================================
+export const getBasecampsByJalur = (jalurId) =>
+    basecamps.filter(b => b.jalur_id === jalurId);
+
+export const getLayananByBasecamp = (basecampId) =>
+    layananBasecamp.filter(l => l.basecamp_id === basecampId);
+
+export const getLayananByType = (type) =>
+    layananBasecamp.filter(l => l.type === type);
+
+export const getJalurByGunung = (gunungId) =>
+    jalurPendakian.filter(j => j.gunung_id === gunungId);
+
+export const getUserById = (userId) =>
+    users.find(u => u.id === userId);
+
+export const getBasecampWithVendor = (basecampId) => {
+    const basecamp = basecamps.find(b => b.id === basecampId);
+    if (!basecamp) return null;
+    return {
+        ...basecamp,
+        vendor: getUserById(basecamp.user_id)
+    };
+};
+
+// Legacy exports for backward compatibility
+export const popularMountains = gunungData;
+export const gearRentals = layananBasecamp.filter(l => l.type === 'equipment').slice(0, 5);

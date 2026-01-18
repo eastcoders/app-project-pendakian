@@ -1,0 +1,105 @@
+// Marketplace Mock Data
+
+export const categories = [
+    { id: 1, name: 'Mountains', icon: 'landscape', isActive: true },
+    { id: 2, name: 'Open Trip', icon: 'map', isActive: false },
+    { id: 3, name: 'Gear Rental', icon: 'backpack', isActive: false },
+    { id: 4, name: 'Porters', icon: 'hiking', isActive: false },
+    { id: 5, name: 'Guides', icon: 'person_pin', isActive: false },
+];
+
+export const popularMountains = [
+    {
+        id: 1,
+        name: 'Mt. Rinjani',
+        location: 'Lombok, Indonesia',
+        rating: 4.8,
+        price: 50,
+        imageUrl: 'https://images.unsplash.com/photo-1606224992006-8c07b3c4e421?w=600&h=450&fit=crop',
+        isFavorite: false,
+    },
+    {
+        id: 2,
+        name: 'Mt. Fuji',
+        location: 'Honshu, Japan',
+        rating: 4.9,
+        price: 120,
+        imageUrl: 'https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?w=600&h=450&fit=crop',
+        isFavorite: false,
+    },
+    {
+        id: 3,
+        name: 'Matterhorn',
+        location: 'Zermatt, Switzerland',
+        rating: 4.7,
+        price: 200,
+        imageUrl: 'https://images.unsplash.com/photo-1531400158697-004a4a6d0f2a?w=600&h=450&fit=crop',
+        isFavorite: true,
+    },
+    {
+        id: 4,
+        name: 'Mt. Semeru',
+        location: 'East Java, Indonesia',
+        rating: 4.6,
+        price: 35,
+        imageUrl: 'https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?w=600&h=450&fit=crop',
+        isFavorite: false,
+    },
+    {
+        id: 5,
+        name: 'Mt. Bromo',
+        location: 'East Java, Indonesia',
+        rating: 4.8,
+        price: 25,
+        imageUrl: 'https://images.unsplash.com/photo-1589308078059-be1415eab4c3?w=600&h=450&fit=crop',
+        isFavorite: false,
+    },
+];
+
+export const gearRentals = [
+    {
+        id: 1,
+        name: 'Ultralight 2P Tent',
+        brand: 'Big Agnes',
+        price: 15,
+        priceUnit: 'day',
+        imageUrl: 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=400&h=400&fit=crop',
+        isBookmarked: false,
+    },
+    {
+        id: 2,
+        name: 'Quest 4 GTX',
+        brand: 'Salomon',
+        price: 12,
+        priceUnit: 'day',
+        imageUrl: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop',
+        isBookmarked: false,
+    },
+    {
+        id: 3,
+        name: 'Atmos AG 65',
+        brand: 'Osprey',
+        price: 10,
+        priceUnit: 'day',
+        imageUrl: 'https://images.unsplash.com/photo-1622260614927-208ad5d0a9a5?w=400&h=400&fit=crop',
+        isBookmarked: true,
+    },
+    {
+        id: 4,
+        name: 'Trekking Poles',
+        brand: 'Black Diamond',
+        price: 5,
+        priceUnit: 'day',
+        imageUrl: 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=400&h=400&fit=crop',
+        isBookmarked: false,
+    },
+    {
+        id: 5,
+        name: 'Sleeping Bag -10°C',
+        brand: 'The North Face',
+        price: 8,
+        priceUnit: 'day',
+        imageUrl: 'https://images.unsplash.com/photo-1510312305653-8ed496efae75?w=400&h=400&fit=crop',
+        isBookmarked: false,
+    },
+];

@@ -4,10 +4,12 @@ import Header from './components/Header';
 import FeedCard from './components/FeedCard';
 import FeedSkeleton from './components/FeedSkeleton';
 import BottomNav from './components/BottomNav';
+import { MarketplacePage } from './components/marketplace';
 import { feedData } from './data';
 
 function App() {
     const [isLoading, setIsLoading] = useState(true);
+    const [currentPage, setCurrentPage] = useState('home'); // 'home' | 'marketplace'
 
     useEffect(() => {
         // Simulate network request
@@ -17,6 +19,19 @@ function App() {
         return () => clearTimeout(timer);
     }, []);
 
+    // Handle navigation
+    const handleNavigate = (page) => {
+        setCurrentPage(page);
+    };
+
+    // Render Marketplace Page
+    if (currentPage === 'marketplace') {
+        return (
+            <MarketplacePage onBack={() => setCurrentPage('home')} />
+        );
+    }
+
+    // Render Home/Feed Page
     return (
         <Layout>
             <Header />
@@ -42,7 +57,7 @@ function App() {
                     ))
                 )}
             </main>
-            <BottomNav />
+            <BottomNav onNavigate={handleNavigate} currentPage={currentPage} />
         </Layout>
     );
 }

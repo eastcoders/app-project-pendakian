@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Home, Map, Plus, MessageCircle, User } from 'lucide-react';
+import { Home, Store, Plus, MessageCircle, User } from 'lucide-react';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 
-const BottomNav = () => {
+const BottomNav = ({ onNavigate, currentPage = 'home' }) => {
     const { scrollY } = useScroll();
     const [hidden, setHidden] = useState(false);
 
@@ -15,8 +15,11 @@ const BottomNav = () => {
         }
     });
 
-    const NavItem = ({ icon: Icon, label, active = false }) => (
-        <button className={`flex flex-col items-center justify-center gap-1 w-16 group transition-colors ${active ? 'text-accent' : 'text-gray-400 hover:text-primary'}`}>
+    const NavItem = ({ icon: Icon, label, pageKey, active = false }) => (
+        <button
+            onClick={() => onNavigate?.(pageKey)}
+            className={`flex flex-col items-center justify-center gap-1 w-16 group transition-colors ${active ? 'text-accent' : 'text-gray-400 hover:text-primary'}`}
+        >
             <Icon className={`w-6 h-6 ${active ? 'fill-current' : ''}`} />
             <span className="text-[10px] font-medium">{label}</span>
         </button>
@@ -34,14 +37,14 @@ const BottomNav = () => {
                 className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-30 bg-surface/90 backdrop-blur-lg border-t border-gray-100 pb-5 pt-3 px-6 shadow-[0_-5px_15px_rgba(0,0,0,0.02)]"
             >
                 <div className="flex items-center justify-between">
-                    <NavItem icon={Home} label="Home" active />
-                    <NavItem icon={Map} label="Map" />
+                    <NavItem icon={Home} label="Home" pageKey="home" active={currentPage === 'home'} />
+                    <NavItem icon={Store} label="Marketplace" pageKey="marketplace" active={currentPage === 'marketplace'} />
 
                     {/* Spacer for FAB */}
                     <div className="w-12" />
 
-                    <NavItem icon={MessageCircle} label="Chat" />
-                    <NavItem icon={User} label="Profile" />
+                    <NavItem icon={MessageCircle} label="Chat" pageKey="chat" active={currentPage === 'chat'} />
+                    <NavItem icon={User} label="Profile" pageKey="profile" active={currentPage === 'profile'} />
                 </div>
             </motion.nav>
 

@@ -18,6 +18,10 @@ export default {
                 "background-dark": "#102219",
                 "active-dark": "#2F4F4F",
                 "price-green": "#3CB371",
+                // Detail Page specific
+                "primary-neon": "#13ec80",
+                "surface-dark": "#1A2C23",
+                "text-dark": "#111814",
             },
             fontFamily: {
                 "sans": ["Plus Jakarta Sans", "sans-serif"],

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import MaterialIcon from './MaterialIcon';
 
-const MountainCard = ({ mountain }) => {
+const MountainCard = ({ mountain, onClick }) => {
     const [isFavorite, setIsFavorite] = useState(mountain.isFavorite);
     const [imageLoaded, setImageLoaded] = useState(false);
     const [imageError, setImageError] = useState(false);
@@ -14,7 +14,10 @@ const MountainCard = ({ mountain }) => {
     };
 
     return (
-        <div className="relative flex flex-col min-w-[280px] snap-center group cursor-pointer">
+        <div
+            onClick={() => onClick?.(mountain)}
+            className="relative flex flex-col min-w-[280px] snap-center group cursor-pointer"
+        >
             {/* Image Container */}
             <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-md bg-gray-100">
                 {/* Skeleton placeholder while loading */}
@@ -64,8 +67,8 @@ const MountainCard = ({ mountain }) => {
                 {/* Difficulty Badge (if available) */}
                 {mountain.difficulty && (
                     <div className={`absolute bottom-3 right-3 px-2 py-1 rounded-lg text-xs font-semibold ${mountain.difficulty === 'Easy' ? 'bg-green-500 text-white' :
-                            mountain.difficulty === 'Medium' ? 'bg-yellow-500 text-white' :
-                                'bg-red-500 text-white'
+                        mountain.difficulty === 'Medium' ? 'bg-yellow-500 text-white' :
+                            'bg-red-500 text-white'
                         }`}>
                         {mountain.difficulty}
                     </div>

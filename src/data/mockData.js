@@ -80,7 +80,7 @@ export const gunungData = [
         nama_gunung: 'Gunung Rinjani',
         mdpl: 3726,
         provinsi: 'Nusa Tenggara Barat',
-        imageUrl: 'https://images.unsplash.com/photo-1606224992006-8c07b3c4e421?w=600&h=450&fit=crop',
+        imageUrl: 'https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?w=600&h=450&fit=crop',
         rating: 4.8,
         totalReviews: 1247,
         difficulty: 'Hard',

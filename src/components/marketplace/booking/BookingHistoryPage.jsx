@@ -20,8 +20,8 @@ const FilterTab = ({ label, count, isActive, onClick, icon: Icon }) => (
     <button
         onClick={onClick}
         className={`flex items-center gap-1.5 px-4 py-2 rounded-full font-medium text-sm transition-all whitespace-nowrap ${isActive
-                ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-200'
-                : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'
+            ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-200'
+            : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'
             }`}
     >
         {Icon && <Icon size={14} />}
@@ -42,6 +42,7 @@ const EmptyState = ({ filter }) => {
     const messages = {
         ALL: 'Belum ada riwayat booking',
         PENDING: 'Tidak ada booking yang menunggu pembayaran',
+        ACTIVE: 'Tidak ada booking yang aktif',
         ONGOING: 'Tidak ada pendakian yang sedang berlangsung',
         COMPLETED: 'Belum ada pendakian yang selesai',
         CANCELLED: 'Tidak ada booking yang dibatalkan',
@@ -123,7 +124,8 @@ const BookingHistoryPage = ({ onBack, onViewDetail }) => {
     // Filter tabs configuration
     const filters = [
         { id: 'ALL', label: 'Semua', count: bookingStats.total },
-        { id: 'ONGOING', label: 'Berlangsung', count: bookingStats.ongoing + bookingStats.confirmed, icon: Loader2 },
+        { id: 'PENDING', label: 'Menunggu Bayar', count: bookingStats.pending, icon: Clock },
+        { id: 'ACTIVE', label: 'Aktif', count: bookingStats.ongoing + bookingStats.confirmed, icon: Loader2 },
         { id: 'COMPLETED', label: 'Selesai', count: bookingStats.completed, icon: CheckCircle },
         { id: 'CANCELLED', label: 'Dibatalkan', count: bookingStats.cancelled, icon: XCircle },
     ];
@@ -131,7 +133,7 @@ const BookingHistoryPage = ({ onBack, onViewDetail }) => {
     // Filtered bookings
     const filteredBookings = useMemo(() => {
         if (activeFilter === 'ALL') return bookings;
-        if (activeFilter === 'ONGOING') {
+        if (activeFilter === 'ACTIVE') {
             return bookings.filter(b => ['CONFIRMED', 'ONGOING'].includes(b.status));
         }
         return bookings.filter(b => b.status === activeFilter);

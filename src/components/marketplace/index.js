@@ -19,7 +19,10 @@ export {
 export {
     BookingProvider,
     useBookings,
+    CheckoutProvider,
+    useCheckout,
     BookingHistoryPage,
     TransactionHistoryPage,
     BookingCard
 } from './booking';
+

@@ -99,8 +99,11 @@ const BookingCard = ({
         return formatDate(dateStr);
     };
 
-    const canCancel = ['PENDING', 'CONFIRMED'].includes(booking.status);
+    // Only PENDING can be cancelled (not yet paid)
+    // CONFIRMED bookings have been paid - need admin process for refund
+    const canCancel = booking.status === 'PENDING';
     const canDownload = ['CONFIRMED', 'ONGOING'].includes(booking.status);
+    const canPay = booking.status === 'PENDING'; // Show "Bayar Sekarang" for pending
 
     if (compact) {
         return (

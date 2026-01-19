@@ -1,15 +1,28 @@
 import React, { useState, useEffect } from 'react';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import Layout from './components/Layout';
 import Header from './components/Header';
 import FeedCard from './components/FeedCard';
 import FeedSkeleton from './components/FeedSkeleton';
 import BottomNav from './components/BottomNav';
-import { MarketplacePage, BookingProvider } from './components/marketplace';
+import {
+    MarketplacePage,
+    BookingProvider,
+    CheckoutProvider
+} from './components/marketplace';
+import {
+    BookingHistoryPage,
+    TransactionHistoryPage
+} from './components/marketplace/booking';
 import { feedData } from './data';
 
-function App() {
+/**
+ * Feed Page Component
+ */
+const FeedPage = () => {
     const [isLoading, setIsLoading] = useState(true);
-    const [currentPage, setCurrentPage] = useState('home'); // 'home' | 'marketplace'
+    const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
         // Simulate network request
@@ -19,27 +32,21 @@ function App() {
         return () => clearTimeout(timer);
     }, []);
 
-    // Handle navigation
     const handleNavigate = (page) => {
-        setCurrentPage(page);
+        if (page === 'marketplace') {
+            navigate('/marketplace');
+        }
     };
 
-    // Render Marketplace Page
-    if (currentPage === 'marketplace') {
-        return (
-            <BookingProvider>
-                <MarketplacePage onBack={() => setCurrentPage('home')} />
-            </BookingProvider>
-        );
-    }
+    // Determine current page from location
+    const currentPage = location.pathname === '/' ? 'home' :
+        location.pathname.startsWith('/marketplace') ? 'marketplace' : 'home';
 
-    // Render Home/Feed Page
     return (
         <Layout>
             <Header />
             <main className="flex-1 flex flex-col gap-8 px-4 pt-24 pb-24">
                 {isLoading ? (
-                    // Show 3 skeleton items while loading
                     [...Array(3)].map((_, index) => (
                         <React.Fragment key={index}>
                             <FeedSkeleton />
@@ -61,6 +68,85 @@ function App() {
             </main>
             <BottomNav onNavigate={handleNavigate} currentPage={currentPage} />
         </Layout>
+    );
+};
+
+/**
+ * Marketplace Layout Component
+ * Provides context providers for marketplace routes
+ */
+const MarketplaceLayout = () => {
+    const navigate = useNavigate();
+
+    return (
+        <BookingProvider>
+            <CheckoutProvider>
+                <MarketplacePage onBack={() => navigate('/')} />
+            </CheckoutProvider>
+        </BookingProvider>
+    );
+};
+
+/**
+ * Booking History Layout Component
+ */
+const BookingHistoryLayout = () => {
+    const navigate = useNavigate();
+
+    return (
+        <BookingProvider>
+            <BookingHistoryPage
+                onBack={() => navigate('/marketplace')}
+                onViewDetail={(booking, downloadMode) => {
+                    // Navigate to marketplace with booking data
+                    navigate('/marketplace', {
+                        state: {
+                            viewBooking: booking,
+                            downloadMode
+                        }
+                    });
+                }}
+            />
+        </BookingProvider>
+    );
+};
+
+/**
+ * Transaction History Layout Component
+ */
+const TransactionHistoryLayout = () => {
+    const navigate = useNavigate();
+
+    return (
+        <BookingProvider>
+            <TransactionHistoryPage
+                onBack={() => navigate('/marketplace')}
+                onViewBooking={(booking) => {
+                    navigate('/booking-history');
+                }}
+            />
+        </BookingProvider>
+    );
+};
+
+/**
+ * Main App Component with Routes
+ */
+function App() {
+    return (
+        <Routes>
+            {/* Home/Feed Route */}
+            <Route path="/" element={<FeedPage />} />
+
+            {/* Marketplace Routes */}
+            <Route path="/marketplace/*" element={<MarketplaceLayout />} />
+
+            {/* Booking History Route */}
+            <Route path="/booking-history" element={<BookingHistoryLayout />} />
+
+            {/* Transaction History Route */}
+            <Route path="/transactions" element={<TransactionHistoryLayout />} />
+        </Routes>
     );
 }
 

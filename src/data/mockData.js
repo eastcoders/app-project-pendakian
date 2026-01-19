@@ -383,3 +383,154 @@ export const getBasecampWithVendor = (basecampId) => {
 // Legacy exports for backward compatibility
 export const popularMountains = gunungData;
 export const gearRentals = layananBasecamp.filter(l => l.type === 'equipment').slice(0, 5);
+
+// ============================================
+// BOOKING HISTORY (Mock Data for Demo)
+// ============================================
+export const bookingHistory = [
+    {
+        id: 'HKR-MKL8F200',
+        userId: 1,
+        status: 'CONFIRMED', // PENDING, CONFIRMED, ONGOING, COMPLETED, CANCELLED
+        mountain: gunungData[0], // Rinjani
+        jalur: jalurPendakian[0], // Senaru
+        basecamp: basecamps[0], // Rinjani Basecamp Senaru
+        services: [
+            { ...layananBasecamp[0], quantity: 1 }, // Tenda Dome 2P
+            { ...layananBasecamp[5], quantity: 1 }, // Porter Profesional
+        ],
+        hikerCount: 2,
+        selectedDate: '2026-01-25',
+        subtotal: 425000,
+        serviceFee: 10625,
+        totalAmount: 435625,
+        createdAt: '2026-01-18T10:30:00',
+        paidAt: '2026-01-18T10:35:00',
+    },
+    {
+        id: 'HKR-ABC12345',
+        userId: 1,
+        status: 'COMPLETED',
+        mountain: gunungData[1], // Semeru
+        jalur: jalurPendakian[2], // Ranu Pani
+        basecamp: basecamps[1], // Semeru Adventure Camp
+        services: [
+            { ...layananBasecamp[9], quantity: 1 }, // Paket Semeru 3D2N
+        ],
+        hikerCount: 3,
+        selectedDate: '2026-01-10',
+        subtotal: 4500000,
+        serviceFee: 112500,
+        totalAmount: 4612500,
+        createdAt: '2026-01-05T14:20:00',
+        paidAt: '2026-01-05T14:25:00',
+        completedAt: '2026-01-12T18:00:00',
+    },
+    {
+        id: 'HKR-XYZ78901',
+        userId: 1,
+        status: 'CANCELLED',
+        mountain: gunungData[2], // Bromo
+        jalur: jalurPendakian[3], // Cemoro Lawang
+        basecamp: basecamps[2], // Bromo View Basecamp
+        services: [
+            { ...layananBasecamp[8], quantity: 1 }, // Local Guide Bromo
+        ],
+        hikerCount: 1,
+        selectedDate: '2026-01-15',
+        subtotal: 300000,
+        serviceFee: 7500,
+        totalAmount: 307500,
+        createdAt: '2026-01-12T09:00:00',
+        cancelledAt: '2026-01-13T11:30:00',
+        cancelReason: 'Perubahan jadwal',
+    },
+    {
+        id: 'HKR-DEF45678',
+        userId: 1,
+        status: 'ONGOING',
+        mountain: gunungData[3], // Merbabu
+        jalur: jalurPendakian[4], // Selo
+        basecamp: basecamps[3], // Selo Mountain Gear
+        services: [
+            { ...layananBasecamp[2], quantity: 2 }, // Trekking Pole
+            { ...layananBasecamp[3], quantity: 1 }, // Carrier 60L
+        ],
+        hikerCount: 2,
+        selectedDate: '2026-01-19',
+        subtotal: 115000,
+        serviceFee: 2875,
+        totalAmount: 117875,
+        createdAt: '2026-01-17T16:00:00',
+        paidAt: '2026-01-17T16:05:00',
+    },
+    {
+        id: 'HKR-GHI11223',
+        userId: 1,
+        status: 'PENDING',
+        mountain: gunungData[4], // Prau
+        jalur: jalurPendakian[6], // Dieng
+        basecamp: null,
+        services: [],
+        hikerCount: 4,
+        selectedDate: '2026-02-01',
+        subtotal: 0,
+        serviceFee: 0,
+        totalAmount: 0,
+        createdAt: '2026-01-19T08:00:00',
+    },
+];
+
+// ============================================
+// TRANSACTION HISTORY (Mock Data for Demo)
+// ============================================
+export const transactionHistory = [
+    {
+        id: 'TRX-001',
+        bookingId: 'HKR-MKL8F200',
+        type: 'PAYMENT',
+        status: 'SUCCESS',
+        amount: 435625,
+        paymentMethod: 'QRIS',
+        createdAt: '2026-01-18T10:35:00',
+    },
+    {
+        id: 'TRX-002',
+        bookingId: 'HKR-ABC12345',
+        type: 'PAYMENT',
+        status: 'SUCCESS',
+        amount: 4612500,
+        paymentMethod: 'QRIS',
+        createdAt: '2026-01-05T14:25:00',
+    },
+    {
+        id: 'TRX-003',
+        bookingId: 'HKR-XYZ78901',
+        type: 'REFUND',
+        status: 'SUCCESS',
+        amount: 307500,
+        paymentMethod: 'QRIS',
+        createdAt: '2026-01-13T12:00:00',
+    },
+    {
+        id: 'TRX-004',
+        bookingId: 'HKR-DEF45678',
+        type: 'PAYMENT',
+        status: 'SUCCESS',
+        amount: 117875,
+        paymentMethod: 'QRIS',
+        createdAt: '2026-01-17T16:05:00',
+    },
+];
+
+// ============================================
+// BOOKING HELPER FUNCTIONS
+// ============================================
+export const getBookingById = (bookingId) =>
+    bookingHistory.find(b => b.id === bookingId);
+
+export const getBookingsByStatus = (status) =>
+    bookingHistory.filter(b => b.status === status);
+
+export const getTransactionsByBooking = (bookingId) =>
+    transactionHistory.filter(t => t.bookingId === bookingId);

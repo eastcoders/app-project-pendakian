@@ -1,7 +1,7 @@
 import React from 'react';
 import MaterialIcon from './MaterialIcon';
 
-const MarketplaceHeader = ({ onBack, searchQuery, onSearchChange, onClearSearch }) => {
+const MarketplaceHeader = ({ onBack, searchQuery, onSearchChange, onClearSearch, onViewHistory }) => {
     return (
         <div className="sticky top-0 z-30 bg-background-light/95 backdrop-blur-sm pt-6 pb-2 px-4 shadow-[0_1px_0_0_rgba(0,0,0,0.05)]">
             <div className="flex items-center gap-3">
@@ -39,6 +39,17 @@ const MarketplaceHeader = ({ onBack, searchQuery, onSearchChange, onClearSearch 
                         </button>
                     </div>
                 </div>
+
+                {/* History Button */}
+                {onViewHistory && (
+                    <button
+                        onClick={onViewHistory}
+                        className="p-2 rounded-full hover:bg-gray-100 transition-colors relative"
+                        title="Riwayat Booking"
+                    >
+                        <MaterialIcon name="receipt_long" className="text-active-dark text-[24px]" />
+                    </button>
+                )}
             </div>
         </div>
     );

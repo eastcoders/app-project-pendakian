@@ -11,7 +11,15 @@ import EmptyState from './EmptyState';
 import MountainDetailPage from './MountainDetailPage';
 import BasecampServicesPage from './BasecampServicesPage';
 import { MountainGridView, OpenTripGridView, ServiceGroupedView } from './views';
-import { CheckoutPage, PaymentPage, BookingSuccessPage } from './booking';
+import {
+    CheckoutPage,
+    PaymentPage,
+    BookingSuccessPage,
+    BookingProvider,
+    useBookings,
+    BookingHistoryPage,
+    TransactionHistoryPage
+} from './booking';
 import useDebounce from '../../hooks/useDebounce';
 import {
     categories,
@@ -57,6 +65,9 @@ const MarketplacePage = ({ onBack }) => {
         selectedDate: null
     });
     const [paymentData, setPaymentData] = useState(null);
+
+    // History View State
+    const [historyView, setHistoryView] = useState(null); // null | 'bookings' | 'transactions'
 
     // Simulate initial data loading
     useEffect(() => {
@@ -235,6 +246,12 @@ const MarketplacePage = ({ onBack }) => {
         setPaymentData(null);
     };
 
+    // Navigate to booking history
+    const handleViewBookings = () => {
+        handleGoHome();
+        setHistoryView('bookings');
+    };
+
     const hasResults = searchResults.mountains.length > 0 ||
         searchResults.basecamps.length > 0 ||
         searchResults.services.length > 0;
@@ -253,6 +270,48 @@ const MarketplacePage = ({ onBack }) => {
     // View: Initial Full Page Skeleton
     if (isLoading) {
         return <MarketplaceSkeleton />;
+    }
+
+    // View: Booking History Page
+    if (historyView === 'bookings') {
+        return (
+            <BookingHistoryPage
+                onBack={() => setHistoryView(null)}
+                onViewDetail={(booking, downloadMode) => {
+                    if (downloadMode) {
+                        // Navigate to success page to download ticket
+                        setPaymentData({
+                            orderId: booking.id,
+                            amount: booking.totalAmount,
+                            method: 'QRIS',
+                            paidAt: booking.paidAt
+                        });
+                        setBookingDetails({
+                            mountain: booking.mountain,
+                            jalur: booking.jalur,
+                            basecamp: booking.basecamp,
+                            hikerCount: booking.hikerCount,
+                            selectedDate: booking.selectedDate
+                        });
+                        setCartItems(booking.services || []);
+                        setHistoryView(null);
+                        setBookingStep('success');
+                    }
+                }}
+            />
+        );
+    }
+
+    // View: Transaction History Page
+    if (historyView === 'transactions') {
+        return (
+            <TransactionHistoryPage
+                onBack={() => setHistoryView(null)}
+                onViewBooking={(booking) => {
+                    console.log('View booking:', booking);
+                }}
+            />
+        );
     }
 
     // View: Mountain Detail Page
@@ -319,7 +378,7 @@ const MarketplacePage = ({ onBack }) => {
                     items: cartItems
                 }}
                 onGoHome={handleGoHome}
-                onViewBookings={() => console.log('View bookings')}
+                onViewBookings={handleViewBookings}
             />
         );
     }
@@ -332,6 +391,7 @@ const MarketplacePage = ({ onBack }) => {
                 searchQuery={searchQuery}
                 onSearchChange={setSearchQuery}
                 onClearSearch={handleClearSearch}
+                onViewHistory={() => setHistoryView('bookings')}
             />
 
             {/* Category Filter Chips */}

@@ -4,7 +4,7 @@ import Header from './components/Header';
 import FeedCard from './components/FeedCard';
 import FeedSkeleton from './components/FeedSkeleton';
 import BottomNav from './components/BottomNav';
-import { MarketplacePage } from './components/marketplace';
+import { MarketplacePage, BookingProvider } from './components/marketplace';
 import { feedData } from './data';
 
 function App() {
@@ -27,7 +27,9 @@ function App() {
     // Render Marketplace Page
     if (currentPage === 'marketplace') {
         return (
-            <MarketplacePage onBack={() => setCurrentPage('home')} />
+            <BookingProvider>
+                <MarketplacePage onBack={() => setCurrentPage('home')} />
+            </BookingProvider>
         );
     }
 
